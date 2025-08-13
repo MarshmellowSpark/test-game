@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Quantum Forge — Incremental</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preconnect" href="." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <h1>Quantum Forge</h1>
+      <div class="meta">
+        <span id="tickInfo">⏱</span>
+        <button id="saveBtn" title="Ctrl/Cmd+S">Save</button>
+        <button id="exportBtn">Export</button>
+        <button id="importBtn">Import</button>
+        <select id="themeSel" title="Theme">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="terminal">Terminal</option>
+        </select>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button data-tab="play" class="active">Play</button>
+      <button data-tab="upgrades">Upgrades</button>
+      <button data-tab="research">Research</button>
+      <button data-tab="challenges">Challenges</button>
+      <button data-tab="achievements">Achievements</button>
+      <button data-tab="prestige">Ascend</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+
+    <main class="panes">
+      <!-- PLAY -->
+      <section id="play" class="pane active">
+        <div class="columns">
+          <div class="panel">
+            <h2>Core</h2>
+            <div class="stats">
+              <div>Energy ⚡: <span id="energy">0</span></div>
+              <div>Energy/sec: <span id="eps">0</span></div>
+              <div>Total Energy: <span id="totalEnergy">0</span></div>
+              <div>Multiplier: <span id="mult">1.00×</span></div>
+              <div>Shards ✨: <span id="shards">0</span></div>
+              <div>RP 🧪: <span id="rp">0</span></div>
+            </div>
+            <button id="bigBtn" class="big">Forge +<span id="clickVal">1</span> ⚡</button>
+            <div class="hint">Hotkeys: Space/Enter to Forge • 1-9 buy generators • Shift=×10 • Ctrl/Cmd=Max</div>
+          </div>
+
+          <div class="panel">
+            <h2>Generators</h2>
+            <div id="generators" class="grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UPGRADES -->
+      <section id="upgrades" class="pane">
+        <div class="panel">
+          <h2>Upgrades</h2>
+          <div id="upgradesList" class="grid"></div>
+        </div>
+      </section>
+
+      <!-- RESEARCH -->
+      <section id="research" class="pane">
+        <div class="panel">
+          <h2>Research (costs RP 🧪)</h2>
+          <div id="researchList" class="grid"></div>
+        </div>
+      </section>
+
+      <!-- CHALLENGES -->
+      <section id="challenges" class="pane">
+        <div class="panel">
+          <h2>Challenges</h2>
+          <div id="challengesList" class="grid"></div>
+          <div id="activeChallenge" class="active-challenge"></div>
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENTS -->
+      <section id="achievements" class="pane">
+        <div class="panel">
+          <h2>Achievements</h2>
+          <div id="achievementsList" class="ach-list"></div>
+        </div>
+      </section>
+
+      <!-- PRESTIGE -->
+      <section id="prestige" class="pane">
+        <div class="panel">
+          <h2>Ascend</h2>
+          <p>Reset Energy, Generators, Upgrades. Gain <b>Shards ✨</b> which give a permanent global multiplier.</p>
+          <p>Next Ascend yields: <span id="nextShards">0</span> ✨</p>
+          <button id="ascendBtn" class="danger">Ascend & Reset</button>
+          <div class="note">Formula: ⌊(Total Energy / 1e6) ^ 0.5⌋</div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="settings" class="pane">
+        <div class="panel">
+          <h2>Settings</h2>
+          <div class="settings">
+            <label><input type="checkbox" id="autosaveToggle" checked> Autosave (20s)</label>
+            <label><input type="checkbox" id="notifsToggle" checked> Popups</label>
+            <button id="hardResetBtn" class="danger">Hard Reset (wipe save)</button>
+          </div>
+          <div class="log" id="log"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
