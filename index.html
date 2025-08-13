@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Quantum Forge — Incremental</title>
+  <title>Quantum Forge</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="preconnect" href="." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,6 +19,9 @@
           <option value="dark">Dark</option>
           <option value="light">Light</option>
           <option value="terminal">Terminal</option>
+          <option value="neon">Neon</option>
+          <option value="solar">Solarized</option>
+          <option value="midnight">Midnight</option>
         </select>
       </div>
     </header>
@@ -35,31 +37,35 @@
     </nav>
 
     <main class="panes">
-      <!-- PLAY -->
       <section id="play" class="pane active">
         <div class="columns">
-          <div class="panel">
-            <h2>Core</h2>
-            <div class="stats">
-              <div>Energy ⚡: <span id="energy">0</span></div>
-              <div>Energy/sec: <span id="eps">0</span></div>
-              <div>Total Energy: <span id="totalEnergy">0</span></div>
-              <div>Multiplier: <span id="mult">1.00×</span></div>
-              <div>Shards ✨: <span id="shards">0</span></div>
-              <div>RP 🧪: <span id="rp">0</span></div>
+          <div class="panel panel-core">
+            <div class="quick">
+              <div class="qstat"><span>⚡</span><div><div class="label">Energy</div><div id="energy" class="val">0</div></div></div>
+              <div class="qstat"><span>⏳</span><div><div class="label">Energy/sec</div><div id="eps" class="val">0</div></div></div>
+              <div class="qstat"><span>∑</span><div><div class="label">Total</div><div id="totalEnergy" class="val">0</div></div></div>
+              <div class="qstat"><span>✴︎</span><div><div class="label">Multiplier</div><div id="mult" class="val">1×</div></div></div>
+              <div class="qstat"><span>✨</span><div><div class="label">Shards</div><div id="shards" class="val">0</div></div></div>
+              <div class="qstat"><span>🧪</span><div><div class="label">RP</div><div id="rp" class="val">0</div></div></div>
             </div>
             <button id="bigBtn" class="big">Forge +<span id="clickVal">1</span> ⚡</button>
-            <div class="hint">Hotkeys: Space/Enter to Forge • 1-9 buy generators • Shift=×10 • Ctrl/Cmd=Max</div>
+            <div class="hint">Space/Enter to Forge • 1–9 buy generators • Shift=×10 • Ctrl/Cmd=Max</div>
           </div>
 
           <div class="panel">
-            <h2>Generators</h2>
+            <div class="panel-head">
+              <h2>Generators</h2>
+              <div class="bulk">
+                <button id="bulk1" data-bulk="1" class="active">×1</button>
+                <button id="bulk10" data-bulk="10">×10</button>
+                <button id="bulkMax" data-bulk="max">Max</button>
+              </div>
+            </div>
             <div id="generators" class="grid"></div>
           </div>
         </div>
       </section>
 
-      <!-- UPGRADES -->
       <section id="upgrades" class="pane">
         <div class="panel">
           <h2>Upgrades</h2>
@@ -67,15 +73,13 @@
         </div>
       </section>
 
-      <!-- RESEARCH -->
       <section id="research" class="pane">
         <div class="panel">
-          <h2>Research (costs RP 🧪)</h2>
+          <h2>Research</h2>
           <div id="researchList" class="grid"></div>
         </div>
       </section>
 
-      <!-- CHALLENGES -->
       <section id="challenges" class="pane">
         <div class="panel">
           <h2>Challenges</h2>
@@ -84,7 +88,6 @@
         </div>
       </section>
 
-      <!-- ACHIEVEMENTS -->
       <section id="achievements" class="pane">
         <div class="panel">
           <h2>Achievements</h2>
@@ -92,32 +95,31 @@
         </div>
       </section>
 
-      <!-- PRESTIGE -->
       <section id="prestige" class="pane">
         <div class="panel">
           <h2>Ascend</h2>
-          <p>Reset Energy, Generators, Upgrades. Gain <b>Shards ✨</b> which give a permanent global multiplier.</p>
+          <p>Reset most progress to gain Shards that permanently increase power.</p>
           <p>Next Ascend yields: <span id="nextShards">0</span> ✨</p>
           <button id="ascendBtn" class="danger">Ascend & Reset</button>
-          <div class="note">Formula: ⌊(Total Energy / 1e6) ^ 0.5⌋</div>
+          <div class="note">⌊(Total Energy / 1e6) ^ 0.5⌋</div>
         </div>
       </section>
 
-      <!-- SETTINGS -->
       <section id="settings" class="pane">
         <div class="panel">
           <h2>Settings</h2>
           <div class="settings">
             <label><input type="checkbox" id="autosaveToggle" checked> Autosave (20s)</label>
             <label><input type="checkbox" id="notifsToggle" checked> Popups</label>
-            <button id="hardResetBtn" class="danger">Hard Reset (wipe save)</button>
+            <button id="downloadSaveBtn">Download Save</button>
+            <input id="uploadSaveInput" type="file" accept=".qfsave,application/json" />
+            <button id="hardResetBtn" class="danger">Hard Reset</button>
           </div>
           <div class="log" id="log"></div>
         </div>
       </section>
     </main>
   </div>
-
   <script src="main.js"></script>
 </body>
 </html>
